@@ -16,6 +16,7 @@ import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
+import Error from "components/Appointment/Error";
 
 
 //Button componenet
@@ -149,7 +150,7 @@ storiesOf("InterviewerList", module)
   ));
 
 //Appointment component
-//child components (Header, Empty, Show)
+//child components (Header, Empty, Show, Confirm, Status, Error)
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
@@ -174,3 +175,9 @@ storiesOf("Appointment", module)
     />
   ))
   .add("Status", () => <Status message="Deleting" />)
+  .add("Error", () => (
+    <Error
+      message="Could not delete appointment"
+      onClose={action("onClose")}
+    />
+  ));
