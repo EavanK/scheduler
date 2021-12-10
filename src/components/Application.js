@@ -1,28 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DayList from "./DayList";
+import Appointment from "components/Appointment";
+import getAppointmentsForDay from "helpers/selectors";
 
 import "components/Application.scss";
 
-import Appointment from "components/Appointment";
-
 export default function Application(props) {
+  // combine states into one state(day, days, appointments)
   const [state, setState] = useState({ 
     day: "Monday",
     days: [],
-    appointments: []
+    appointments: {}
   });
 
+  // change day state when click day
   const setDay = day => setState({...state, day});
-  const setDays = days => setState(prev => ({...prev, days}));
 
+  // Get data from api server
   useEffect(() => {
-    axios.get("/api/days").then(res => {
-      setDays(res.data);
-    });
+    const getDays = axios.get("/api/days");
+    const getAppointments = axios.get("/api/appointments");
+    const getInterviews = axios.get("/api/interviewers");
+    // get data at the same time (promise all)
+    Promise.all([getDays, getAppointments, getInterviews])
+      .then(all => {
+        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data}))
+      });
   }, []);
 
-  const appointmentListItem = state.appointments.map(appointment => {
+  // use helper function to transform data that needs to pass down to Appointment component (getAppointmentsForDay)
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const appointmentListItem = dailyAppointments.map(appointment => {
     return (
       <Appointment key={appointment.id} {...appointment} />
     );
