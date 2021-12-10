@@ -1,10 +1,12 @@
 export default function getAppointmentsForDay(state, day) {
-  const result = [];
-  const filteredDay = state.days.filter(id => id.name === day);
-  if (filteredDay[0]) {
-    filteredDay[0].appointments.map(id => {
-      result.push(state.appointments[`${id}`])
-    });
+  const {days, appointments} = state;
+
+  let result = [];
+
+  const filteredDay = days.find(filter => filter.name === day);
+
+  if (filteredDay) {
+    result = filteredDay.appointments.map(id => appointments[id])
   }
   return result;
 };
