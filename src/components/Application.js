@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 import "components/Application.scss";
 
@@ -35,6 +35,8 @@ export default function Application(props) {
       });
   }, []);
 
+  // array of interviewers on specific day
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
   // use helper function to transform data that needs to pass down to Appointment component (getAppointmentsForDay)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const appointmentListItem = dailyAppointments.map(appointment => {
@@ -45,6 +47,7 @@ export default function Application(props) {
         key={appointment.id}
         {...appointment}
         interview={interview}
+        interviewers={dailyInterviewers}
       />
     );
   });
