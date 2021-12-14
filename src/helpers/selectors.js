@@ -34,3 +34,16 @@ export const getInterview = (state, interview) => {
 	newInterview.interviewer = interviewers[interviewer];
 	return newInterview;
 };
+
+// implement spots remaining after book/cancel appointment
+export const setSpots = prev => {
+	prev.days.map(day => {
+		const spots = day.appointments.filter(appId => {
+			return prev.appointments[appId].interview === null;
+		});
+		// set spots with new spots remaining
+		day.spots = spots.length;
+		return day;
+	});
+	return prev.days;
+};
