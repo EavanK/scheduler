@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { setSpots } from "helpers/selectors";
 
 export default function useApplicationData() {
 	// combine states into one state(day, days, appointments)
@@ -39,9 +40,10 @@ export default function useApplicationData() {
 			...state.appointments,
 			[id]: appointment,
 		};
-		const url = `/api/appointments/${id}`;
-		return axios.put(url, { interview }).then(res => {
-			setState({ ...state, appointments });
+
+		return axios.put(`/api/appointments/${id}`, { interview }).then(res => {
+			setState(prev => ({ ...prev, appointments }));
+			setState(prev => ({ ...prev, days: setSpots(prev) }));
 		});
 	}
 
@@ -55,9 +57,10 @@ export default function useApplicationData() {
 			...state.appointments,
 			[id]: appointment,
 		};
-		const url = `/api/appointments/${id}`;
-		return axios.delete(url, { interview: null }).then(res => {
-			setState({ ...state, appointments });
+
+		return axios.delete(`/api/appointments/${id}`).then(res => {
+			setState(prev => ({ ...prev, appointments }));
+			setState(prev => ({ ...prev, days: setSpots(prev) }));
 		});
 	}
 
