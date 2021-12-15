@@ -37,18 +37,17 @@ export const getInterview = (state, interview) => {
 
 // implement spots remaining after book/cancel appointment
 export const setSpots = prev => {
-	// make sure do not mutate state
+	// make sure do not mutate original state
+	// in order to update the spots on a specific day
+	// get number of spots available on the specific day
+	// set spots with new spots remaining
+
 	const newDays = JSON.parse(JSON.stringify(prev.days));
-	newDays.map(day => {
-		// in order to update the spots for a day
-		if (prev.day === day.name) {
-			const spots = day.appointments.filter(appId => {
-				return prev.appointments[appId].interview === null;
-			});
-			// set spots with new spots remaining
-			day.spots = spots.length;
-		}
-		return day;
+	const theDay = newDays.find(day => prev.day === day.name);
+	const spots = theDay.appointments.filter(appId => {
+		return prev.appointments[appId].interview === null;
 	});
+	theDay.spots = spots.length;
+
 	return newDays;
 };
