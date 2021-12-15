@@ -27,8 +27,19 @@ export default function useApplicationData() {
 		});
 	}, []);
 
+	// WebSocket
 	useEffect(() => {
 		const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+		// send message to server
+		webSocket.onopen = event => {
+			webSocket.send("ping");
+		};
+
+		// receive message from server
+		webSocket.onmessage = event => {
+			console.log(event.data);
+		};
 	}, []);
 
 	// change day state when click day
