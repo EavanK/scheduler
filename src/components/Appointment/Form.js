@@ -20,9 +20,10 @@ export default function Form(props) {
 	};
 	// pass 2 arguments (student, interviewer) to parent component (Appointment)
 	const validate = () => {
-		return student === ""
-			? setError("Student name cannot be blank")
-			: onSave(student, interviewer);
+		if (student === "") return setError("Student name cannot be blank");
+
+		setError("");
+		onSave(student, interviewer);
 	};
 
 	return (
