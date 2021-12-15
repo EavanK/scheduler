@@ -27,6 +27,10 @@ export default function useApplicationData() {
 		});
 	}, []);
 
+	useEffect(() => {
+		const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+	}, []);
+
 	// change day state when click day
 	const setDay = day => setState({ ...state, day });
 
