@@ -1,7 +1,7 @@
 # Interview Scheduler
 
 Interview Scheduler is a single page application (SPA)
-using the latest tools and techniques, we build and test a **React** application that allows users to book, edit and cancel interview appointments.
+using the latest tools and techniques, we build and test a **React** application that allows users to book, edit and cancel interview appointments. We combine a concise API with a WebSocket server to build a realtime experience.
 
 ## Getting Started
 
@@ -31,6 +31,9 @@ using the latest tools and techniques, we build and test a **React** application
 
 **Error message**
 ![error_message](https://github.com/EavanK/scheduler/blob/master/docs/5_error_message.gif?raw=true)
+
+**Realtime communication (WebSocket)**
+![realtime_communication](https://github.com/EavanK/scheduler/blob/master/docs/6_realtime_communication.gif?raw=true)
 
 ## Running Webpack Development Server
 
@@ -76,10 +79,11 @@ npm run cypress
 - @testing-library/react-hooks
 - react-test-renderer
 - classnames
+- WebSocket
 
 ## Future Goals
 
-- Replace useState to useReducer
-- Combine a concise API with a WebSocket server to build a realtime experience.
+- ~~Replace useState to useReducer~~
+- ~~Combine a concise API with a WebSocket server to build a realtime experience~~
 - Deploy the server to Heroku
 - Deply the Client to Netlify
