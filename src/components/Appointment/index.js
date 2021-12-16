@@ -9,18 +9,26 @@ import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 import "components/Appointment/styles.scss";
 
-const EMPTY = "EMPTY";
-const SHOW = "SHOW";
-const CREATE = "CREATE";
-const SAVE = "Saving";
-const DELETE = "Deleting";
-const CONFIRM = "CONFIRM";
-const EDIT = "EDIT";
-const ERROR_SAVE = "ERROR_SAVE";
-const saveErrorMessage = "Could not save appointment";
-const ERROR_DELETE = "ERROR_DELETE";
-const deleteErrorMessage = "Could not delete appointment";
-const confirmMessage = "Are you sure you would like to delete?";
+const allMode = {
+	EMPTY: "EMPTY",
+	SHOW: "SHOW",
+	CREATE: "CREATE",
+	SAVE: "Saving",
+	DELETE: "Deleting",
+	CONFIRM: "CONFIRM",
+	EDIT: "EDIT",
+	ERROR_SAVE: "ERROR_SAVE",
+	ERROR_DELETE: "ERROR_DELETE",
+};
+const { EMPTY, SHOW, CREATE, SAVE, DELETE, CONFIRM, EDIT, ERROR_SAVE, ERROR_DELETE } =
+	allMode;
+
+const messages = {
+	saveErrorMessage: "Could not save appointment",
+	deleteErrorMessage: "Could not delete appointment",
+	confirmMessage: "Are you sure you would like to delete?",
+};
+const { saveErrorMessage, deleteErrorMessage, confirmMessage } = messages;
 
 export default function Appointment(props) {
 	const { id, time, interview, interviewers, bookInterview, cancelInterview } = props;
@@ -28,10 +36,7 @@ export default function Appointment(props) {
 
 	// create apopintment
 	function save(name, interviewer) {
-		const interview = {
-			student: name,
-			interviewer,
-		};
+		const interview = { student: name, interviewer };
 		transition(SAVE);
 		bookInterview(id, interview)
 			.then(() => transition(SHOW))
