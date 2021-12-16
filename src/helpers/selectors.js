@@ -1,38 +1,24 @@
 // get Appointments for day
 export const getAppointmentsForDay = (state, day) => {
 	const { days, appointments } = state;
-	let result = [];
-	const filteredDay = days.find(filter => filter.name === day);
-
-	if (filteredDay) {
-		result = filteredDay.appointments.map(id => appointments[id]);
-	}
+	const filteredDay = days.find(dayId => dayId.name === day);
+	if (filteredDay) return filteredDay.appointments.map(id => appointments[id]);
 	// return array of appointments on specific day
-	return result;
+	return [];
 };
 
 //get Interviewers for day
 export const getInterviewersForDay = (state, day) => {
 	const { days, interviewers } = state;
-	let result = [];
-	const filteredDay = days.find(filter => filter.name === day);
-
-	if (filteredDay) {
-		result = filteredDay.interviewers.map(id => interviewers[id]);
-	}
+	const filteredDay = days.find(dayId => dayId.name === day);
+	if (filteredDay) return filteredDay.interviewers.map(id => interviewers[id]);
 	// return array of interviewers on specific day
-	return result;
+	return [];
 };
 
 export const getInterview = (state, interview) => {
 	if (!interview) return null;
-
-	const { interviewers } = state;
-	const { interviewer } = interview;
-	// shouldn't manipulate the original data
-	const newInterview = { ...interview };
-	newInterview.interviewer = interviewers[interviewer];
-	return newInterview;
+	return { ...interview, interviewer: state.interviewers[interview.interviewer] };
 };
 
 // implement spots remaining after book/cancel appointment
