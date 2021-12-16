@@ -22,18 +22,18 @@ export const getInterview = (state, interview) => {
 };
 
 // implement spots remaining after book/cancel appointment
-export const setSpots = prev => {
+export const setSpots = (state, appointments) => {
 	// make sure do not mutate original state
 	// in order to update the spots on a specific day
 	// get number of spots available on the specific day
 	// set spots with new spots remaining
-
-	const newDays = JSON.parse(JSON.stringify(prev.days));
-	const theDay = newDays.find(day => prev.day === day.name);
+	const theDay = state.days.find(day => state.day === day.name);
 	const spots = theDay.appointments.filter(appId => {
-		return prev.appointments[appId].interview === null;
+		return appointments[appId].interview === null;
+	}).length;
+	const days = state.days.map(day => {
+		if (day.name === theDay.name) return { ...day, spots };
+		return day;
 	});
-	theDay.spots = spots.length;
-
-	return newDays;
+	return days;
 };
