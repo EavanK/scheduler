@@ -20,8 +20,7 @@ const allMode = {
 	ERROR_SAVE: "ERROR_SAVE",
 	ERROR_DELETE: "ERROR_DELETE",
 };
-const { EMPTY, SHOW, CREATE, SAVE, DELETE, CONFIRM, EDIT, ERROR_SAVE, ERROR_DELETE } =
-	allMode;
+const { EMPTY, SHOW, CREATE, SAVE, DELETE, CONFIRM, EDIT, ERROR_SAVE, ERROR_DELETE } = allMode;
 
 const messages = {
 	saveErrorMessage: "Could not save appointment",
@@ -58,7 +57,7 @@ export default function Appointment(props) {
 	}
 
 	return (
-		<article className="appointment">
+		<article className="appointment" data-testid="appointment">
 			<Header time={time} />
 			{/* if you click button, add CRATE mode and change mode to CREATE mode */}
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
@@ -88,9 +87,7 @@ export default function Appointment(props) {
 				<Confirm message={confirmMessage} onCancel={() => back()} onConfirm={onDelete} />
 			)}
 			{mode === ERROR_SAVE && <Error onClose={() => back()} message={saveErrorMessage} />}
-			{mode === ERROR_DELETE && (
-				<Error onClose={() => back()} message={deleteErrorMessage} />
-			)}
+			{mode === ERROR_DELETE && <Error onClose={() => back()} message={deleteErrorMessage} />}
 		</article>
 	);
 }
