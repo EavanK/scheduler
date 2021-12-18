@@ -63,7 +63,7 @@ describe("Application", () => {
 		);
 
 		fireEvent.click(getByAltText(appointment, "Delete"));
-		expect(getByText(appointment, "Are you sure you would like to delete?"));
+		expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
 
 		fireEvent.click(getByText(appointment, "Confirm"));
 		expect(getByText(appointment, "Deleting")).toBeInTheDocument();
@@ -73,6 +73,5 @@ describe("Application", () => {
 		const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"));
 
 		expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-		console.log(prettyDOM(appointment));
 	});
 });
