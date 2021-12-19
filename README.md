@@ -62,6 +62,12 @@ cd scheduler-api
 npm run test:server
 ```
 
+> Make sure `scheduler` is running
+
+```
+npm run start
+```
+
 > type this command to run cypress in `scheduler` directory
 
 ```
@@ -73,17 +79,21 @@ npm run cypress
 - React
 - Axios
 - react-dom
-- Storybook
-- Jest
-- Cypress
-- @testing-library/react-hooks
-- react-test-renderer
 - classnames
 - WebSocket
+
+## devDependencies
+
+- storybook
+- @testing-library
+- Cypress
+- node-sass
+- prop-types
+- react-test-renderer
 
 ## Future Goals
 
 - ~~Replace useState to useReducer~~
 - ~~Combine a concise API with a WebSocket server to build a realtime experience~~
-- Deploy the server to Heroku
+- ~~Deploy the server to Heroku~~
 - Deply the Client to Netlify
