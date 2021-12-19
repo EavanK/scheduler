@@ -11,7 +11,7 @@ export default function Form(props) {
 	// reset input value (student name), interviewer
 	const reset = () => {
 		setStudent("");
-		setInterviewer("");
+		setInterviewer(null);
 	};
 	// call reset and onCancel functions
 	const cancel = () => {
@@ -20,8 +20,8 @@ export default function Form(props) {
 	};
 	// pass 2 arguments (student, interviewer) to parent component (Appointment)
 	const validate = () => {
-		if (student === "") return setError("Student name cannot be blank");
-
+		if (!student) return setError("Student name cannot be blank");
+		if (!interviewer) return setError("Please select an interviewer");
 		setError("");
 		onSave(student, interviewer);
 	};
