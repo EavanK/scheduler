@@ -56,6 +56,10 @@ export default function Appointment(props) {
 			.catch(err => transition(ERROR_DELETE, true));
 	}
 
+	function cancel() {
+		back();
+	}
+
 	return (
 		<article className="appointment" data-testid="appointment">
 			<Header time={time} />
@@ -71,23 +75,21 @@ export default function Appointment(props) {
 					onEdit={() => transition(EDIT)}
 				/>
 			)}
-			{mode === CREATE && (
-				<Form interviewers={interviewers} onCancel={() => back()} onSave={save} />
-			)}
+			{mode === CREATE && <Form interviewers={interviewers} onCancel={cancel} onSave={save} />}
 			{mode === EDIT && (
 				<Form
 					interviewers={interviewers}
-					onCancel={() => back()}
+					onCancel={cancel}
 					onSave={save}
 					student={interview.student}
 					interviewer={interview.interviewer.id}
 				/>
 			)}
 			{mode === CONFIRM && (
-				<Confirm message={confirmMessage} onCancel={() => back()} onConfirm={onDelete} />
+				<Confirm message={confirmMessage} onCancel={cancel} onConfirm={onDelete} />
 			)}
-			{mode === ERROR_SAVE && <Error onClose={() => back()} message={saveErrorMessage} />}
-			{mode === ERROR_DELETE && <Error onClose={() => back()} message={deleteErrorMessage} />}
+			{mode === ERROR_SAVE && <Error onClose={cancel} message={saveErrorMessage} />}
+			{mode === ERROR_DELETE && <Error onClose={cancel} message={deleteErrorMessage} />}
 		</article>
 	);
 }
