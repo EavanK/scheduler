@@ -1,7 +1,11 @@
 # Interview Scheduler
 
+## Summary
+
 Interview Scheduler is a single page application (SPA)
 using the latest tools and techniques, we build and test a **React** application that allows users to book, edit and cancel interview appointments. We combine a concise API with a WebSocket server to build a realtime experience.
+
+> **Demo** [interview-schduler.app](https://interview-schduler-eavank.netlify.app/)
 
 ## Getting Started
 
@@ -55,24 +59,34 @@ npm run storybook
 
 ## Running Cypress End-to-End Test
 
-> Make sure [scheduler-api](https://github.com/EavanK/scheduler-api) server is running in test mode with this command
+> Make sure [scheduler-api](https://github.com/EavanK/scheduler-api) server is running in test mode with this command.
+
+- _in scheduler-api directory_
 
 ```
-cd scheduler-api
 npm run test:server
 ```
 
-> Make sure `scheduler` is running
+> Make sure `scheduler` is running.
+
+- _in scheduler directory_
 
 ```
 npm run start
 ```
 
-> type this command to run cypress in `scheduler` directory
+> Type this command to run cypress in `scheduler` directory.
+> <br/> Make sure both `scheduler` and `scheduler-api` are running.
+
+- _another terminal tap_
+
+- _in scheduler directory_
 
 ```
 npm run cypress
 ```
+
+> Now, you should have 3 terminal taps (`scheduler`, `scheduler-api`, `cypress`)
 
 ## Dependencies
 
@@ -96,4 +110,4 @@ npm run cypress
 - ~~Replace useState to useReducer~~
 - ~~Combine a concise API with a WebSocket server to build a realtime experience~~
 - ~~Deploy the server to Heroku~~
-- Deply the Client to Netlify
+- ~~Deply the Client to Netlify~~
