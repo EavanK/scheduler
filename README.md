@@ -5,7 +5,7 @@
 Interview Scheduler is a single page application (SPA)
 using the latest tools and techniques, we build and test a **React** application that allows users to book, edit and cancel interview appointments. We combine a concise API with a WebSocket server to build a realtime experience.
 
-> **Demo** [interview-schduler.app](https://interview-schduler-eavank.netlify.app/)
+> **Demo** [interview-schduler.app](https://interview-scheduler-eavank.netlify.app/)
 
 ## Getting Started
 
